@@ -1,0 +1,3 @@
+firebase-admin
+google-cloud-secret-manager
+python-dotenv
