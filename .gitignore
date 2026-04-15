@@ -18,5 +18,15 @@ ENV/
 .DS_Store
 Thumbs.db
 
+# Firebase
+.firebase/
+
 # Project Specific
 fiai/
+build_log.txt
+git
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env

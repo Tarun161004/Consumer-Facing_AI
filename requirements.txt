@@ -1,3 +1,15 @@
 firebase-admin
 google-cloud-secret-manager
 python-dotenv
+fastapi
+uvicorn
+pydantic
+groq
+google-generativeai
+mcp
+rich
+slowapi
+kiteconnect
+pdfplumber
+pandas
+python-multipart

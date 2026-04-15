@@ -1,0 +1,302 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ===== Custom Theme ===== */
+@theme {
+  --color-bg-primary: #0a0a12;
+  --color-bg-secondary: #12111f;
+  --color-bg-card: #1a1830;
+  --color-bg-input: #221f38;
+  --color-accent: #7c3aed;
+  --color-accent-hover: #6d28d9;
+  --color-accent-subtle: rgba(124, 58, 237, 0.12);
+  --color-accent-blue: #3b82f6;
+  --color-text-primary: #f1f0f5;
+  --color-text-secondary: #a09db1;
+  --color-text-muted: #6b6880;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-glow: rgba(124, 58, 237, 0.25);
+  --color-user-bubble: linear-gradient(135deg, #7c3aed, #3b82f6);
+  --color-ai-bubble: rgba(255, 255, 255, 0.03);
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ===== Base ===== */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: white;
+  }
+}
+
+/* ===== Glassmorphism Utilities ===== */
+.glass {
+  background: var(--color-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-glass-border);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.4),
+    rgba(59, 130, 246, 0.4),
+    rgba(124, 58, 237, 0.1)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ===== Gradient Backgrounds ===== */
+.gradient-accent {
+  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+}
+
+.gradient-accent-hover:hover {
+  background: linear-gradient(135deg, #6d28d9, #2563eb);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #7c3aed, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Ambient Glow Effect ===== */
+.glow-accent {
+  box-shadow:
+    0 0 20px rgba(124, 58, 237, 0.15),
+    0 0 60px rgba(124, 58, 237, 0.05);
+}
+
+.glow-accent-sm {
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.1);
+}
+
+/* ===== Animations ===== */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes typingDot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+.animate-fadein {
+  animation: fadeIn 0.3s ease-out;
+}
+.animate-slide-left {
+  animation: slideInLeft 0.3s ease-out;
+}
+.animate-slide-right {
+  animation: slideInRight 0.3s ease-out;
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.04),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ===== Typing indicator dots ===== */
+.typing-dots span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  margin: 0 2px;
+  animation: typingDot 1.4s infinite;
+}
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ===== Sidebar transition ===== */
+.sidebar-transition {
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sidebar-label {
+  transition:
+    opacity 0.15s ease,
+    max-width 0.2s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ===== Prose overrides for AI markdown ===== */
+.prose {
+  --tw-prose-body: var(--color-text-primary);
+  --tw-prose-headings: var(--color-text-primary);
+  --tw-prose-bold: var(--color-text-primary);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-code: var(--color-accent);
+  --tw-prose-bullets: var(--color-text-secondary);
+  --tw-prose-counters: var(--color-text-secondary);
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+  margin: 0.75rem 0;
+}
+.prose th,
+.prose td {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.prose th {
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+.prose tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+.prose code {
+  background: rgba(124, 58, 237, 0.1);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+.prose pre {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+.prose a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+.prose a:hover {
+  color: var(--color-accent-hover);
+}

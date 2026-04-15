@@ -3,7 +3,7 @@ import json
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
 
-BASE_DIR = r"D:\fi_ai_agent" 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_KEY_PATH = os.path.join(BASE_DIR, "serviceAccountKey.json")
 
 class FinancialAgentModule1:
@@ -21,7 +21,7 @@ class FinancialAgentModule1:
             try:
                 user = auth.get_user_by_phone_number(phone_number)
                 uid = user.uid
-            except:
+            except Exception:
                 user = auth.create_user(phone_number=phone_number)
                 uid = user.uid
 
@@ -77,17 +77,12 @@ if __name__ == "__main__":
     # 1. Initialize the module
     onboarding_manager = FinancialAgentModule1()
     
-    # 2. Test Onboarding
-    # Replace with your test phone number
-    user_phone = "+918849740996" 
-    user_goals = ["Reduce Waste", "Track Net Worth", "Wealth Tracking"]
+    # 2. Google Account UID (same as web frontend + orchestrator)
+    test_uid = "BB4UcGSnBJQHTC0uoMBwVjNTUeK2"
     
-    print(f"\n🚀 Testing onboarding for: {user_phone}")
-    verified_uid = onboarding_manager.onboard_user(user_phone, user_goals)
-    print(f"✅ Verified UID: {verified_uid}")
+    print(f"\n🚀 Testing onboarding for UID: {test_uid}")
 
     # 3. Test Snapshot Saving (Simulating complex/nested bank data)
-    # This sample data mimics the structure that caused your previous error
     sample_bank_data = {
         "account_id": "fi_acc_123",
         "transactions": [
@@ -98,7 +93,7 @@ if __name__ == "__main__":
     }
 
     print(f"\n⚙️ Testing Snapshot Sync for 'fetch_bank_transactions'...")
-    success = onboarding_manager.save_history_snapshot(verified_uid, sample_bank_data, "fetch_bank_transactions")
+    success = onboarding_manager.save_history_snapshot(test_uid, sample_bank_data, "fetch_bank_transactions")
     
     if success:
         print("✅ Success! Data flattened and saved to Firestore.")

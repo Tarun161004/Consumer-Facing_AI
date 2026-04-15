@@ -1,17 +1,19 @@
 import asyncio
 import json
+import os
 from brain_engine import get_advisor_decision, client, MODEL_NAME, SYSTEM_PROMPT
 from fi_finance_agent import streamablehttp_client, ClientSession
-from onboarding import FinancialAgentModule1 # Added import
+from onboarding import FinancialAgentModule1
 
-FI_SERVER_URL = "https://mcp.fi.money:8080/mcp/stream"
+FI_SERVER_URL = os.environ.get("FI_SERVER_URL", "https://mcp.fi.money:8080/mcp/stream")
 
 async def run_finance_agent():
     print("\n🚀 Starting Firebase-Integrated Finance Agent...")
     
     # Initialize Firebase Module
     fb_agent = FinancialAgentModule1()
-    test_uid = "5laAvVH1uVbFgqn74ucFycgAoQ13" # Your verified ID
+    # DEV ONLY — replace with dynamic UID from authentication in production
+    test_uid = "BB4UcGSnBJQHTC0uoMBwVjNTUeK2"
     chat_history = [] 
 
     try:
@@ -53,7 +55,7 @@ async def run_finance_agent():
                                     fb_agent.save_history_snapshot(test_uid, bank_json, tool_name)
                                     # fb_agent.sync_financial_data(test_uid, bank_json)
                                     print("--- ✅ Live Data Synced to Firebase ---")
-                                except:
+                                except Exception:
                                     print("--- ⚠️ Sync Warning: Data was not in JSON format ---")
 
                                 turn_messages.append({
@@ -85,6 +87,3 @@ async def run_finance_agent():
 
 if __name__ == "__main__":
     asyncio.run(run_finance_agent())
-
-
-

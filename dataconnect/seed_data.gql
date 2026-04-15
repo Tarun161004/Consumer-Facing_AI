@@ -1,0 +1,123 @@
+mutation CreateSeedData @transaction @auth(level: USER, insecureReason: "Seed data mutations are for development purposes only and are safe to expose to all logged in users.") {
+  user_insertMany(data: [
+    {
+      id: "b2d07584-0a37-4d9c-8f19-7d84a7e9e7f8",
+      createdAt: "2023-01-01T10:00:00Z",
+      displayName: "Alice",
+      email: "alice@example.com",
+      photoUrl: "https://example.com/alice.jpg"
+    },
+    {
+      id: "a3e9c2b1-5f6d-4e7a-8c03-1e2f3d4c5b6a",
+      createdAt: "2023-01-02T11:00:00Z",
+      displayName: "Bob",
+      email: "bob@example.com",
+      photoUrl: "https://example.com/bob.jpg"
+    }
+  ])
+  movie_insertMany(data: [
+    {
+      id: "d9a8b7c6-1e2f-3a4b-5c6d-7e8f9a0b1c2d",
+      createdAt: "2023-01-05T09:00:00Z",
+      genres: ["Action", "Sci-Fi"],
+      runtime: 148,
+      summary: "A thief who steals corporate secrets through use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+      title: "Inception",
+      year: 2010
+    },
+    {
+      id: "f1e0d9c8-7b6a-5f4e-3d2c-1b0a9f8e7d6c",
+      createdAt: "2023-01-06T10:00:00Z",
+      genres: ["Drama", "Crime"],
+      runtime: 152,
+      summary: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+      title: "Pulp Fiction",
+      year: 1994
+    },
+    {
+      id: "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+      createdAt: "2023-01-07T11:00:00Z",
+      genres: ["Fantasy", "Adventure"],
+      runtime: 179,
+      summary: "A young hobbit, Frodo Baggins, inherits a magical ring that is crucial to the fate of his world. He embarks on an epic quest to destroy the ring and save Middle-earth from the Dark Lord Sauron.",
+      title: "The Lord of the Rings: The Fellowship of the Ring",
+      year: 2001
+    }
+  ])
+  movieList_insertMany(data: [
+    {
+      id: "c4b3a2d1-f6e5-8b9a-0c1d-2e3f4a5b6c7d",
+      userId: "b2d07584-0a37-4d9c-8f19-7d84a7e9e7f8",
+      createdAt: "2023-01-10T12:00:00Z",
+      description: "Alice's favorite action movies",
+      isPublic: true,
+      name: "Alice's Action Flicks",
+      updatedAt: "2023-01-10T12:00:00Z"
+    },
+    {
+      id: "e5f4d3c2-a1b2-c3d4-e5f6-7a8b9c0d1e2f",
+      userId: "a3e9c2b1-5f6d-4e7a-8c03-1e2f3d4c5b6a",
+      createdAt: "2023-01-11T13:00:00Z",
+      description: "Bob's top dramas",
+      isPublic: false,
+      name: "Bob's Drama Collection",
+      updatedAt: "2023-01-11T13:00:00Z"
+    }
+  ])
+  movieListEntry_insertMany(data: [
+    {
+      movieListId: "c4b3a2d1-f6e5-8b9a-0c1d-2e3f4a5b6c7d",
+      position: 1,
+      movieId: "d9a8b7c6-1e2f-3a4b-5c6d-7e8f9a0b1c2d",
+      note: "Mind-bending action!"
+    },
+    {
+      movieListId: "e5f4d3c2-a1b2-c3d4-e5f6-7a8b9c0d1e2f",
+      position: 1,
+      movieId: "f1e0d9c8-7b6a-5f4e-3d2c-1b0a9f8e7d6c",
+      note: "Classic Tarantino"
+    }
+  ])
+  watch_insertMany(data: [
+    {
+      id: "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      movieId: "d9a8b7c6-1e2f-3a4b-5c6d-7e8f9a0b1c2d",
+      userId: "b2d07584-0a37-4d9c-8f19-7d84a7e9e7f8",
+      createdAt: "2023-01-15T14:00:00Z",
+      location: "Living Room",
+      watchDate: "2023-01-15"
+    },
+    {
+      id: "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+      movieId: "f1e0d9c8-7b6a-5f4e-3d2c-1b0a9f8e7d6c",
+      userId: "a3e9c2b1-5f6d-4e7a-8c03-1e2f3d4c5b6a",
+      createdAt: "2023-01-16T15:00:00Z",
+      location: "Bedroom",
+      watchDate: "2023-01-16"
+    }
+  ])
+  review_insertMany(data: [
+    {
+      id: "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      movieId: "d9a8b7c6-1e2f-3a4b-5c6d-7e8f9a0b1c2d",
+      userId: "b2d07584-0a37-4d9c-8f19-7d84a7e9e7f8",
+      watchId: "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      createdAt: "2023-01-15T16:00:00Z",
+      isPublic: true,
+      rating: 5,
+      reviewText: "Absolutely brilliant, a must-watch!",
+      updatedAt: "2023-01-15T16:00:00Z"
+    },
+    {
+      id: "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+      movieId: "f1e0d9c8-7b6a-5f4e-3d2c-1b0a9f8e7d6c",
+      userId: "a3e9c2b1-5f6d-4e7a-8c03-1e2f3d4c5b6a",
+      watchId: "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+      createdAt: "2023-01-16T17:00:00Z",
+      isPublic: false,
+      rating: 4,
+      reviewText: "Great dialogue and memorable characters.",
+      updatedAt: "2023-01-16T17:00:00Z"
+    }
+  ])
+}
