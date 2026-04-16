@@ -72,7 +72,7 @@ async def run_finance_agent():
                                     "name": tool_name,
                                     "content": "Error: Bank server timeout.",
                                 })
-    
+
                         final_res = client.chat.completions.create(model=MODEL_NAME, messages=turn_messages)
                         ai_message = final_res.choices[0].message.content
                     else:
